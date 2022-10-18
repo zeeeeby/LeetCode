@@ -13,20 +13,16 @@
 
 var flatten = function(root) {
     let ptr = root
-    const stack = []
     
     while (ptr) {
         if (ptr.left) {
-            if (ptr.right) stack.push(ptr.right)
+            let lp = ptr.left
+            while (lp.right) lp = lp.right
+            lp.right = ptr.right
             ptr.right = ptr.left
             ptr.left = null
         }
-        else {
-            if (!ptr.right && stack.length) {
-                ptr.right = stack.pop()
-            }
-        }
-            
+        
         ptr = ptr.right
     }
     return root
