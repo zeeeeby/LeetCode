@@ -17,5 +17,18 @@ const helper = (left, right) => {
     return helper(left.left, right.right) && helper(left.right, right.left)
 }
 var isSymmetric = function(root) {
+    return nonRecursive(root)
     return helper(root.left, root.right)
 };
+
+const nonRecursive = (root) => {
+    const stack = [[root.left, root.right]]
+    while (stack.length) {
+        const [left, right] = stack.pop()
+        if (!left && !right) continue
+        if (!left && right || left && !right) return false 
+        if (left.val !== right.val) return false
+        stack.push([left.left, right.right], [left.right, right.left])
+    }
+    return true
+}
