@@ -28,3 +28,18 @@ var hasPathSum = function(root, targetSum) {
     helper(root, targetSum)
     return ans
 };
+
+var hasPathSum = function(root, targetSum) {
+    if (!root) return false
+    const stack = [[root, root.val]]
+    while (stack.length) {
+        const [r, val] = stack.pop()
+        if (!r.left && !r.right) {
+            if (val === targetSum) return true
+            
+        }
+        if (r.left) stack.push([r.left, r.left.val + val])
+        if (r.right) stack.push([r.right, r.right.val + val])
+    }
+    return false
+};
