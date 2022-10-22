@@ -14,15 +14,8 @@
 
 var maxDepth = function(root) {
     if (!root) return 0
-    let ans = 1
-    const helper = (root, depth) => {
-        if (!root) return
-        if (!(root.left || root.right)) {
-            ans = Math.max(ans, depth)
-        }
-        helper(root.right, depth + 1)
-        helper(root.left, depth + 1)
-    }
-    helper(root, 1)
-    return ans
+    
+    const left_ans = maxDepth(root.left)
+    const right_ans = maxDepth(root.right)
+    return Math.max(left_ans, right_ans) + 1
 };
