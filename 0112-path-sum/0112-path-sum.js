@@ -31,15 +31,14 @@ var hasPathSum = function(root, targetSum) {
 
 var hasPathSum = function(root, targetSum) {
     if (!root) return false
-    const stack = [[root, root.val]]
+    const stack = [[root, targetSum]]
     while (stack.length) {
         const [r, val] = stack.pop()
+        if (!r) continue
         if (!r.left && !r.right) {
-            if (val === targetSum) return true
-            
+            if (r.val === val) return true
         }
-        if (r.left) stack.push([r.left, r.left.val + val])
-        if (r.right) stack.push([r.right, r.right.val + val])
+        stack.push([r.left, val - r.val], [r.right, val - r.val])
     }
     return false
 };
