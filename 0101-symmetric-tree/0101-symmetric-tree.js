@@ -26,9 +26,13 @@ const nonRecursive = (root) => {
     while (stack.length) {
         const [left, right] = stack.pop()
         if (!left && !right) continue
-        if (!left && right || left && !right) return false 
-        if (left.val !== right.val) return false
-        stack.push([left.left, right.right], [left.right, right.left])
+        if (left && right) {
+            if (left.val !== right.val) return false
+            stack.push([left.left, right.right], [left.right, right.left])
+        }
+        else {
+            return false
+        }
     }
     return true
 }
